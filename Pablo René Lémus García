@@ -69,9 +69,9 @@ INSERT INTO Libros (titulo, fecha_publicacion, num_paginas, isbn, id_editorial) 
 ('El señor de los anillos', '1954-07-29', 1216, '978-0-618-26026-3', 3);
 
 INSERT INTO Autores (nombre_completo, fecha_nacimiento, biografia) VALUES
-('Gabriel García Márquez', '1927-03-06', 'Escritor colombiano ganador del Premio Nobel de Literatura.'),
-('George Orwell', '1900-06-25', 'Escritor y periodista británico.'),
-('J.R.R. Tolkien', '1892-01-03', 'Escritor y filólogo británico conocido por sus obras de fantasía.');
+('Gabriel García Márquez', '1997-03-06', 'Escritor colombiano ganador del Premio Nobel de Literatura.'),
+('George Orwell', '1990-06-25', 'Escritor y periodista británico.'),
+('J.R.R. Tolkien', '1992-01-03', 'Escritor y filólogo británico conocido por sus obras de fantasía.');
 
 INSERT INTO Libros_Autores (id_libro, id_autor) VALUES
 (1, 1),
@@ -79,12 +79,12 @@ INSERT INTO Libros_Autores (id_libro, id_autor) VALUES
 (3, 3);
 
 INSERT INTO Usuarios (nombre_completo, correo_electronico, telefono) VALUES
-('Juan Pérez', 'juan.perez@example.com', '123456789'),
-('María García', 'maria.garcia@example.com', '987654321');
+('Juan Pérez', 'juan.perez@gmail.com', '54148774'),
+('María García', 'maria.garcia@gmail.com', '21178559');
 
 INSERT INTO Prestamos (id_usuario, id_libro, fecha_inicio, fecha_limite_devolucion, estado) VALUES
-(1, 1, '2023-10-26', '2023-11-09', 'pendiente'),
-(2, 2, '2023-10-26', '2023-11-09', 'entregado');
+(1, 1, '2025-3-26', '2025-4-09', 'pendiente'),
+(2, 2, '2025-3-26', '2025-4-09', 'entregado');
 
 INSERT INTO Inventario (id_libro, cantidad_total, cantidad_prestados) VALUES
 (1, 5, 1),
