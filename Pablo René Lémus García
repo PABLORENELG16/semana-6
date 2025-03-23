@@ -1,0 +1,92 @@
+CREATE DATABASE IF NOT EXISTS tarea_semana_5;
+
+USE tarea_semana_5;
+
+CREATE TABLE Editoriales (
+  id_editorial INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_editorial VARCHAR(255)
+);
+
+CREATE TABLE Libros (
+  id_libro INT AUTO_INCREMENT PRIMARY KEY,
+  titulo VARCHAR(255),
+  fecha_publicacion DATE,
+  num_paginas INT,
+  isbn VARCHAR(20) UNIQUE,
+  id_editorial INT,
+  FOREIGN KEY (id_editorial) REFERENCES Editoriales(id_editorial)
+);
+
+CREATE TABLE Autores (
+  id_autor INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_completo VARCHAR(255),
+  fecha_nacimiento DATE,
+  biografia TEXT
+);
+
+CREATE TABLE Libros_Autores (
+  id_libro INT,
+  id_autor INT,
+  PRIMARY KEY (id_libro, id_autor),
+  FOREIGN KEY (id_libro) REFERENCES Libros(id_libro),
+  FOREIGN KEY (id_autor) REFERENCES Autores(id_autor)
+);
+
+CREATE TABLE Usuarios (
+  id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_completo VARCHAR(255),
+  correo_electronico VARCHAR(255) UNIQUE,
+  telefono VARCHAR(20)
+);
+
+CREATE TABLE Prestamos (
+  id_prestamo INT AUTO_INCREMENT PRIMARY KEY,
+  id_usuario INT,
+  id_libro INT,
+  fecha_inicio DATE,
+  fecha_limite_devolucion DATE,
+  fecha_entrega_real DATE,
+  estado ENUM('pendiente', 'entregado', 'retrasado'),
+  FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario),
+  FOREIGN KEY (id_libro) REFERENCES Libros(id_libro)
+);
+
+CREATE TABLE Inventario (
+  id_libro INT PRIMARY KEY,
+  cantidad_total INT,
+  cantidad_prestados INT,
+  FOREIGN KEY (id_libro) REFERENCES Libros(id_libro)
+);
+
+INSERT INTO Editoriales (nombre_editorial) VALUES
+('Planeta'),
+('Penguin Random House'),
+('HarperCollins');
+
+INSERT INTO Libros (titulo, fecha_publicacion, num_paginas, isbn, id_editorial) VALUES
+('Cien años de soledad', '1967-05-30', 496, '978-0-06-112008-4', 1),
+('1984', '1949-06-08', 328, '978-0-451-52493-5', 2),
+('El señor de los anillos', '1954-07-29', 1216, '978-0-618-26026-3', 3);
+
+INSERT INTO Autores (nombre_completo, fecha_nacimiento, biografia) VALUES
+('Gabriel García Márquez', '1927-03-06', 'Escritor colombiano ganador del Premio Nobel de Literatura.'),
+('George Orwell', '1900-06-25', 'Escritor y periodista británico.'),
+('J.R.R. Tolkien', '1892-01-03', 'Escritor y filólogo británico conocido por sus obras de fantasía.');
+
+INSERT INTO Libros_Autores (id_libro, id_autor) VALUES
+(1, 1),
+(2, 2),
+(3, 3);
+
+INSERT INTO Usuarios (nombre_completo, correo_electronico, telefono) VALUES
+('Juan Pérez', 'juan.perez@example.com', '123456789'),
+('María García', 'maria.garcia@example.com', '987654321');
+
+INSERT INTO Prestamos (id_usuario, id_libro, fecha_inicio, fecha_limite_devolucion, estado) VALUES
+(1, 1, '2023-10-26', '2023-11-09', 'pendiente'),
+(2, 2, '2023-10-26', '2023-11-09', 'entregado');
+
+INSERT INTO Inventario (id_libro, cantidad_total, cantidad_prestados) VALUES
+(1, 5, 1),
+(2, 3, 1),
+(3, 2, 0);
